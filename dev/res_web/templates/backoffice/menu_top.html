@@ -1,0 +1,149 @@
+$def with (username=None, otp=None)
+	<!-- Left links for user info navbar -->
+<!-- <div class="row">
+	<div class="col-md-3">
+		<ul class="user-info-menu left-links list-inline list-unstyled">
+		
+			<li class="hidden-sm hidden-xs">
+				<a href="#" data-toggle="sidebar">
+					<i class="fa-bars"></i>
+				</a>
+			</li>
+
+			<li class="dropdown hover-line" id="warning_setopt">
+				<a href="#" data-toggle="dropdown">
+					<i class="fa-bell-o"></i>
+					<span class="badge badge-red"></span>
+				</a>
+
+            $if otp:					
+				<ul class="dropdown-menu notifications">
+					<li class="top">
+						<p class="small">        						
+            						<a id="setotp" href="javascript:;" rel="设置OTP" title="/settings/otp"><span class="line"><i class="fa-user"></i>设置OTP</span></a>
+						</p>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-3">
+		<ul class="user-info-menu left-links list-inline list-unstyled" style="width:100%;" id="warning_setopt_content">
+			<li style="height:76px;line-height:76px;width:100%;">
+				<marquee behavior="alternate" style="color:green;" onmouseover="this.stop()" onmouseout="this.start()">
+        				$if otp:
+        					<a id="setotpSecond" href="javascript:;" rel="设置OTP" title="/settings/otp">请设置OTP</a>
+				</marquee>
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-3"> -->
+		<!-- <div class="progress" style="background-color:#BBFFFF;">
+		  <div class="progress-bar progress-bar-striped progress-bar-danger active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+		    完成任务进度：45%
+		  </div>
+		</div> -->
+<!-- 	</div>
+	<div class="col-md-3">
+		<ul class="user-info-menu right-links list-inline list-unstyled">
+			
+			<li class="dropdown user-profile">
+				<a href="#" data-toggle="dropdown">
+					<img src="assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
+					<span>
+						Arlind Nushi
+						<i class="fa-angle-down"></i>
+					</span>
+				</a>
+				
+				<ul class="dropdown-menu user-profile-menu list-unstyled">
+					<li>
+						<a href="javascript:;" rel="个人信息" title="/settings/person_info" id="person_info">
+							<span class="title">个人信息</span>
+						</a>
+					</li>
+				</ul>
+			</li>
+			
+		</ul>
+	</div>
+</div> -->
+
+
+
+
+<!-- Left links for user info navbar -->
+<ul class="user-info-menu left-links list-inline list-unstyled">
+	
+	<li class="hidden-sm hidden-xs">
+		<a href="#" data-toggle="sidebar">
+			<i class="fa-bars"></i>
+		</a>
+	</li>
+	
+	<li class="dropdown hover-line" id="warning_setopt">
+		<a href="#" data-toggle="dropdown">
+			<i class="fa-bell-o"></i>
+			<span class="badge badge-red"></span>
+		</a>
+    $if otp:			
+		<ul class="dropdown-menu notifications">
+			<li class="top">
+				<p class="small">        				
+        					<a id="setotp" href="javascript:;" rel="设置OTP" title="/settings/otp"><span class="line"><i class="fa-user"></i>设置OTP</span></a>
+				</p>
+			</li>
+		</ul>
+	</li>
+
+	<li style="height:76px;line-height:76px;" id="warning_setopt_content">
+		<marquee behavior="alternate" style="color:green;" onmouseover="this.stop()" onmouseout="this.start()">
+        		$if otp:
+        			<a id="setotpSecond" href="javascript:;" rel="设置OTP" title="/settings/otp">请设置OTP</a>
+		</marquee>
+	</li>
+	
+
+</ul>
+
+
+<!-- Right links for user info navbar -->
+<ul class="user-info-menu right-links list-inline list-unstyled">
+
+	<li>
+<br>
+<!--
+系统时间：<div style="margin: 0px 0px 0px; display: inline-block; text-align: center; width: 200px;"><noscript><div style="display: inline-block; padding: 0px 4px; margin: 0px 0px 5px; border: 0px solid rgb(204, 204, 204); text-align: center; background-color: transparent;">
+<img src="http://localtimes.info/images/countries/us.png"="" border=0="" style="border:0;margin:0;padding:0"=""> New+York+Jfk+Intl+Arpt</div></noscript><script type="text/javascript" onclick="#" src="http://localtimes.info/clock.php?continent=North America&country=United States&province=New York&city=New York Jfk Intl Arpt&cp1_Hex=000000&cp2_Hex=FFFFFF&cp3_Hex=000000&fwdt=200&ham=1&hbg=1&hfg=0&sid=1&mon=1&wek=0&wkf=0&sep=0&widget_number=1100"></script></div>
+<br>
+本地时间：<div style="margin: 0px 0px 0px; display: inline-block; text-align: center; width: 200px;"><noscript><div style="display: inline-block; padding: 0px 4px; margin: 0px 0px 5px; border: 0px solid rgb(204, 204, 204); text-align: center; background-color: transparent;">
+<img src="http://localtimes.info/images/countries/us.png"="" border=0="" style="border:0;margin:0;padding:0"=""> Philippines</div></noscript><script type="text/javascript"  onclick="#" src="http://localtimes.info/clock.php?continent=Asia&country=Philippines&city=Manila&cp1_Hex=000000&cp2_Hex=FFFFFF&cp3_Hex=000000&fwdt=200&ham=1&hbg=1&hfg=0&sid=1&mon=1&wek=0&wkf=0&sep=0&widget_number=1100"></script></div>
+-->
+
+</li>
+	<li class="dropdown user-profile">
+		<a href="#" data-toggle="dropdown">
+			<img src="assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
+			<span>
+				$username
+				<i class="fa-angle-down"></i>
+			</span>
+		</a>
+		
+		<ul class="dropdown-menu user-profile-menu list-unstyled">
+			<li><a href="javascript:;" rel="个人信息" title="/settings/person_info" id="person_info"><span class="title">个人信息</span></a></li>
+			<li><a href="javascript:;" rel="修改密码" title="/settings/person_pass" id="person_pass"><span class="title">修改密码</span></a></li>
+			<li>
+				<a href="account/lo" rel="登出" title="/test/lo" id="person_pass"><span class="title">登出</span></a>
+			</li>
+		</ul>
+	</li>
+	<li class="external">
+		<a href="javascript:;">
+			<span></span>
+			<i class="fa-link-ext"></i>
+		</a>
+	</li>
+	
+	
+</ul>

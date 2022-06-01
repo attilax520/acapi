@@ -1,0 +1,68 @@
+<!--
+$def with (data=None, data_last_id=0, order="")
+-->
+<script src="/backoffice/assets/js/jquery-2.0.3.min.js"></script>
+<link rel="stylesheet" href="/backoffice/assets/css/bootstrap.min.css">
+<script src="/backoffice/assets/js/bootstrap.min.js"></script>
+<link href="/other.css" rel="stylesheet" />
+<br>
+<div class="row">
+
+
+ <div class="row">
+	<div class="col-md-11">
+        <input type="hidden" value="$$order" id="sortvalue">
+		<table class="table" style="font-family:微软雅黑;font-size:15px;font-weight:normal; margin: 10px;">
+			<thead>
+				<tr>
+					<th><a href="javascript:listsort('status__x__id');">标示</a><input type="hidden" value="0" id="status__x__id"><span class="glyphicon glyphicon-resize-small" aria-hidden="true" id="status__x__id1"></span></th>
+        <th><a href="javascript:listsort('status__x__status_name');">名称</a><input type="hidden" value="0" id="status__x__status_name"><span class="glyphicon glyphicon-resize-small" aria-hidden="true" id="status__x__status_name1"></span></th>
+        <th><a href="javascript:listsort('status__x__is_active');">激活</a><input type="hidden" value="0" id="status__x__is_active"><span class="glyphicon glyphicon-resize-small" aria-hidden="true" id="status__x__is_active1"></span></th>
+        
+					<th colspan="2" style="white-space: nowrap;text-align: center;">操作</th>
+				</tr>
+
+			</thead>
+			<tbody>
+                <tr>
+                        <form method="POST">
+                            <td>$(data_last_id)</td>
+                            <td style="vertical-align: middle"><input type="text" name="status_name" class="form-control"  value=></td>
+                            <td style="vertical-align: middle"><input type="checkbox" name="is_active" class="form-control"  value=></td>
+                            
+                            <td colspan=2>
+                                    <center>
+                                    <input type="hidden" name="action" value="create">
+                                    <input type="submit" value="创建" name="" class="btn btn-success">
+                            </td>
+                        </form>
+                    </tr>
+
+            $if data:
+                $for item in data:
+                    <tr>
+                        <form method="POST" style="white-space:nowrap; page-break-inside: avoid;DISPLAY:inline;" name="listrow" id="listrow">
+                            <td style="vertical-align: middle"><input type="number" name="id" class="form-control" readonly=yes value="$item.id" ></td>
+                            <td style="vertical-align: middle"><input type="text" name="status_name" class="form-control"  value="$item.status_name" ></td>
+                            <td style="vertical-align: middle"><input type="checkbox" name="is_active" class="form-control"  value="$item.is_active" $return_string(item.is_active, 'checked', '')></td>
+
+                            <td colspan=2 style="white-space: nowrap;" >                                
+                                <center>
+                                    <div style="display:inline-block">
+                                        <input type="hidden" name="id" value="$item.id">
+                                        <button type="submit" name="action" value="save" class="btn btn-success">保存</button>
+                                        <button type="submit" name="action" value="delete"class="btn btn-danger">删除</button>
+                                    </div>
+                                </center>
+                            <td>
+                            </td>
+                            </form>
+                    </tr>
+			</tbody>
+		</table>
+	</div>
+<div>
+
+<br>
+
+<script src="/backoffice/assets/js/table_sort.js"></script>

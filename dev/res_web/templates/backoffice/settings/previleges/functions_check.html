@@ -1,0 +1,12 @@
+$def with (items, status=None, msg="")
+
+$:msg
+$if items:
+    $for item in items:
+        $if item.name and item.id != 0:
+            <input type="checkbox"                    
+            $ val = 2**item.id
+            $if status and status & val == val:
+                checked
+            name="check_$item.id" value=$item.id />$item.name</input>
+

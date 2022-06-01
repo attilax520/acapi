@@ -1,0 +1,41 @@
+$def with(user_type=None)
+    $if user_type:
+        $if (user_type == -1) or (user_type & 4096 == 4096):
+                    <li id="stage_pri">
+						<a href="#">
+							<i class="linecons-star"></i>
+							<span class="title">平台</span>
+						</a>
+						<ul>
+							<li>
+								<a href="javascript:;" rel="组织域" title="/settings/previleges/groups">
+									<span class="title">组织域</span>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;" rel="用户" title="/settings/previleges/users">
+									<span class="title">用户</span>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;" rel="角色" title="/settings/previleges/roles">
+									<span class="title">角色</span>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;" rel="功能" title="/settings/previleges/functions">
+									<span class="title">功能</span>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;" rel="数据范围" title="/settings/previleges/ranges">
+									<span class="title">数据范围</span>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;" rel="常用权限" title="/settings/previleges/frequently">
+									<span class="title">常用权限</span>
+								</a>
+							</li>
+						</ul>
+					</li>

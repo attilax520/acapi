@@ -1,0 +1,56 @@
+<!--
+$def with (data=None, data_last_id=0, pages=0, page=0, order="", msg="")
+-->
+
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<script src="/assets/js/jquery-2.0.3.min.js"></script>
+<link href="/other.css" rel="stylesheet" />
+<br>
+<div class="row">
+	<div class="">
+
+<center><div>$:msg</p></div></center>
+
+ <div class="row">
+	<div class="col-md-11">
+		<table class="table" style="font-family:微软雅黑;font-size:15px;font-weight:normal; margin: 10px;">
+			<thead>
+				<tr>
+					<th>id<th>设置对象<th>描述<th>值<th>内容<th>状态
+					<th colspan="2" style="text-align: center;">操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+				</tr>
+
+			</thead>
+			<tbody>
+
+            $if data == -1:
+                # 正在维护中请晚一点再来
+            $elif data:
+                $for item in data:
+                    <tr>
+                        <form method="POST" style="white-space:nowrap; page-break-inside: avoid;DISPLAY:inline;" >
+                            <td>$item.id2</td>
+                            <td>$item.name</td>
+                            <td>$item.description</td>
+                            <td><input type="number" name="value" class="form-control"  value="$item.value" placeholder="$item.value" ></td>
+                            <td><input type="text" name="content" class="form-control"  value="$item.content" placeholder="$item.content" ></td>
+                            <td><input type="number" name="status" class="form-control"  value="$item.status" placeholder="$item.status"></td>
+                            <td colspan=2 style="" ><center><input type="hidden" name="id" value="$item.id2">
+                            
+                                    <button type="submit" name="action" value="save" class="btn btn-success">保存</button>
+                                   
+                            </td>
+                            </form>
+                    </tr>
+            $else:
+                无数据
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div>
+<br>
+
+</div>

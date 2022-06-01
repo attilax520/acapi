@@ -1,0 +1,24 @@
+$def with (table, id=None, name=None, parent=None, index_order=None, link=None, status="", addcontent=None)
+
+请输入
+$if name:
+	${name}的
+的新名称：
+
+<form method="POST" enctype="multipart/form-data" action="">
+<input type=hidden name="t" value="$table"  >
+<input type=hidden name="id" value="$id">
+<input type="hidden" name="parent" value="$parent" />
+<input type="hidden" value="${name}" name="sname" />
+名　称：<input type="text" name="newname" value="$name"  /><br>
+超链接：<input type="text" name="link" value="$link" /><br>
+序　号：<input type=text name="index_order" value="$index_order"　><br>
+状　态：<input type=value name="status" value="$status"　><br>
+$:addcontent
+<br/>
+<input name="action" type="submit" value="修改" />
+<br>
+
+
+</form>
+

@@ -1,0 +1,53 @@
+$def with(user_type=0)
+                        
+
+	$if user_type and (user_type & 16 == 16 or user_type & 256 == 256):
+		<li id="stage_pri">
+			<a href="#">
+				<i class="linecons-star"></i>
+				<span class="title">平台</span>
+			</a>
+			<ul>
+
+				<li>
+					<a href="javascript:;" rel="platform_settings_tags" title="/backoffice/platform_settings/tag">
+						<span class="title">标签</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" rel="platform_settings_categories" title="/backoffice/platform_settings/categories/start">
+						<span class="title">分类</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" rel="platform_rights_management" title="/backoffice/settings/previleges/groups">
+						<span class="title">组织域</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" rel="rights_management_user" title="/backoffice/settings/previleges/users">
+						<span class="title">用户</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" rel="rights_management_roles" title="/backoffice/settings/previleges/roles">
+						<span class="title">角色</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" rel="rights_management_functions" title="/backoffice/settings/previleges/functions">
+						<span class="title">功能</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" rel="rights_management_data_range" title="/backoffice/settings/previleges/ranges">
+						<span class="title">数据范围</span>
+					</a>
+				</li>
+				<li>
+					<a href="javascript:;" rel="rights_management_templates" title="/backoffice/settings/previleges/frequently">
+						<span class="title">常用权限</span>
+					</a>
+				</li>
+			</ul>
+		</li>

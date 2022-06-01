@@ -1,0 +1,19 @@
+<!--
+$def with (table, name=None, add="国家", count_content="")
+-->
+
+<center>
+$count_content
+<form method="POST" enctype="multipart/form-data" action="add">
+    <input type=hidden name="t" value="$table">
+	<input type=hidden name="parent" value="">
+	<br><input type="submit" name="name" value='$add'>
+</form>
+</center>
+
+
+
+
+
+
+

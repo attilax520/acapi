@@ -1,0 +1,53 @@
+$def with (table, id=None, index_order=None, name=None, link=None, item=None, parentcount=None, step=None, count_content="")
+
+<td >
+
+
+	
+<TABLE BORDER=1 width=100%>
+<tr><td>
+<table border=0 width=100% align=center>
+<tr>
+<td  heigth=1  style="background-repeat: repeat-x;">$id.<center>
+
+    <form method="POST" enctype="multipart/form-data" action="?">
+        <input type=hidden name="t" value="$table">
+        <input type=hidden name="delete_parent" value="$item.location_code"  >
+        <input type="hidden" value="$name" name="sname" />
+        <input  type="submit" name="name" value="-">
+    </form>
+
+    <form method="GET" enctype="multipart/form-data" action="edit">        
+        <input type=hidden name="t" value="$table">
+	<input type=hidden name="link" value="$link">
+        <input type=hidden name="id" value="$id">
+	<input type=hidden name="index_order" value="$index_order">
+        <input  type="submit" value="edit">
+    </form>
+
+<tr>
+<td style="WORD-BREAK: break-all; WORD-WRAP: break-word"><center>
+<font size=-1>$item.index_order</font>
+<font size=+1>$item.name </font>
+	<font size=-1>
+	$parentcount
+	$if count_content:
+    	, $count_content
+	
+	)
+<br>
+
+
+<tr>
+<td  _background="static/images/line.png"  style="background-repeat: repeat-x;"><center>
+    <form method="POST" enctype="multipart/form-data" action="add">
+        <input type=hidden name="t" value="$table"  >
+        <input type=hidden name="parent" value="$item.location_code"  >
+        <input type="hidden" value="$name" name="sname" />
+        <input name="action" type=submit id="action_add" value="+">
+    </form>
+
+
+</table>
+
+</TABLE>

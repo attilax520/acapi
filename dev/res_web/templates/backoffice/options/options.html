@@ -1,0 +1,72 @@
+<!--
+$def with (data=None, data_last_id=0)
+-->
+
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<script src="/assets/js/jquery-2.0.3.min.js"></script>
+<link href="/other.css" rel="stylesheet" />
+<br>
+<div class="row">
+	<div class="">
+
+
+ <div class="row">
+	<div class="col-md-11">
+		<table class="table" style="font-family:微软雅黑;font-size:15px;font-weight:normal; margin: 10px;">
+			<thead>
+				<tr>
+					<th>id<th>name<th>description<th>value<th>content<th>status
+					<th colspan="2" style="text-align: center;">操作&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+				</tr>
+
+			</thead>
+			<tbody>
+                <tr>
+                        <form method="POST">
+                            <td>$(data_last_id+1)</td>
+                            <td><input type="text" name="name" class="form-control"  value=></td>
+                            <td><input type="text" name="description" class="form-control"  value=></td>
+                            <td><input type="number" name="value" class="form-control"  value=1></td>
+                            <td><input type="text" name="content" class="form-control"  value=></td>
+                            <td><input type="number" name="status" class="form-control"  value=1></td>
+                            
+                            <td colspan=2>
+                                    <center>
+                                    <input type="hidden" name="action" value="create">
+                                    <input type="submit" value="创建" name="" class="btn btn-success">
+                            </td>
+                        </form>
+                    </tr>
+
+            $if data == -1:
+                # 维护中请过后再来
+            $elif data:
+                $for item in data:
+                    <tr>
+                        <form method="POST" style="white-space:nowrap; page-break-inside: avoid;DISPLAY:inline;" >
+                            <td><input type="number" name="id" class="form-control" readonly=yes value="$item.id"></td>
+                            <td><input type="text" name="name" class="form-control"  value="$item.name"></td>
+                            <td><input type="text" name="description" class="form-control"  value="$item.description"></td>
+                            <td><input type="number" name="value" class="form-control"  value="$item.value"></td>
+                            <td><input type="text" name="content" class="form-control"  value="$item.content"></td>
+                            <td><input type="number" name="status" class="form-control"  value="$item.status"></td>
+                            
+                            <td colspan=2 style="" ><center><input type="hidden" name="id" value="$item.id">
+                                    <button type="submit" name="action" value="save" class="btn btn-success">保存</button>
+                                    <button type="submit" name="action" value="delete"class="btn btn-danger">删除</button>
+                            </td>
+                            </form>
+                    </tr>
+                $else:
+                    无数据
+
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<div>
+<br>
+
+</div>

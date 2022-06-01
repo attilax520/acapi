@@ -1,0 +1,121 @@
+<!--
+$def with (data=None, money_max=None, money_min=None, keywords=None, count=None, total=0, date_min=None, date_max=None, page=1, null_data=None, date_days_not_loggedin=None, money_condition=None,order=None,pages = 0,limit=0, msg="")
+-->
+
+    <link href="/backoffice/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/backoffice/assets/css/xenon-forms.css">
+    <link rel="stylesheet" href="/backoffice/assets/css/bootstrap.css">
+    <link href="/style.css" rel="stylesheet" type="text/css"/>
+
+
+    <script src="/backoffice/assets/js/jquery-2.0.3.min.js"></script>  
+    <!-- Imported styles on this page -->
+    <link rel="stylesheet" href="/backoffice/assets/js/daterangepicker/daterangepicker-bs3.css">
+
+    <!-- Bottom Scripts -->
+    <script src="/backoffice/assets/js/bootstrap.min.js"></script>
+    <script src="/backoffice/assets/js/xenon-api.js"></script>
+
+
+    <!-- Imported scripts on this page -->
+    <script src="/backoffice/assets/js/daterangepicker/daterangepicker.js"></script>
+    <script src="/backoffice/assets/js/datepicker/bootstrap-datepicker.js"></script>
+
+
+    <!-- JavaScripts initializations and stuff -->
+    <script src="/backoffice/assets/js/xenon-custom.js"></script>
+
+<br>
+$if msg:
+    <font color=red><B>$msg</B></font><br><br>
+
+<form method="POST" id="form">
+
+<div class="row" style="margin:0">
+    <div class="col-md-1">
+        关键词：
+    </div>
+    <div class="col-md-2">
+        <input type="text" name="keywords" value="$keywords"  class="form-control">
+    </div>
+
+    <div class="col-md-1">
+        注册时间从：
+    </div>
+    <div class="col-md-2">
+        <input type="text" name="date_min" value="$date_min"  class="form-control datepicker">
+    </div>
+    <div class="col-md-1">
+        到:
+    </div>
+    <div class="col-md-2">
+        <input type="text" name="date_max" value="$date_max"  class="form-control datepicker"> 
+        <input type="hidden" value="$order" name="order" id="orderRemember">
+        <input type="hidden" name="page" id="page" value="$page">
+    </div>
+    <div class="col-md-1">
+        <button type="submit" name="search" value="action_search" class="btn btn-info">搜&nbsp;&nbsp;&nbsp;&nbsp;索</button>
+    </div>
+    </div>
+</form>
+
+<br>
+
+$:render.publish_platforms_list(data=data,order=order,page=page,limit=limit)
+
+
+<div class="row" style="margin:0">
+    <table class="table" style="width:80%; margin-left: auto;margin-right: auto;">
+        <tr>
+            <td class="col-md-4" id="previous"><a href="javascript:changePage(-1);" class="btn btn-sm btn-success"><span aria-hidden="true">&larr;</span>上一页</a></td>
+            <td class="text-center col-md-3">
+                <div class="input-group input-group-sm">
+                $if pages:
+                    <input type="number" value="$page" class="input-sm form-control" min="1" max="$pages" id="choosePage">
+                    <span class="input-group-addon">共${pages}页</span>
+                    <span class="input-group-btn">
+                        <input type="button" value="跳转" class="btn btn-danger btn-sm" onclick="goturnFirst()">
+                    </span>
+                </div>
+            </td> 
+            <td class="text-right col-md-4" id="next" style="text-align:right"><a href="javascript:changePage(1);" class="btn btn-sm btn-success"><span aria-hidden="true"></span>下一页&rarr;</a></td>
+        </tr>
+    </table>
+</div>
+<script type="text/javascript">
+    function changePage(argument) {
+        var now_page = $$("#page").val();
+        var fin_page = parseInt(now_page,10)+parseInt(argument,10);
+        $$("#page").val(fin_page);
+        $$("#form").submit();
+    }
+
+    function changeSta(){
+        var now_page = $$("#page").val();
+        if (now_page<=1) {
+            $$("#previous a").addClass("disabled");
+            $$("#previous a").attr("href","javascript:;");
+        }
+        else{
+            $$("#previous a").removeClass("disabled");
+            $$("#previous a").attr("href","javascript:changePage(-1);");
+        }
+        var pages = $pages;
+        if (now_page>=pages) {
+            $$("#next a").addClass("disabled");
+            $$("#next a").attr("href","javascript:;");
+        }
+        else{
+            $$("#next a").removeClass("disabled");
+            $$("#next a").attr("href","javascript:changePage(1);");
+        }
+    }
+
+    function goturnFirst(){
+        var now_choose = $$("#choosePage").val();
+        $$("#page").val(now_choose);
+        $$("#form").submit();
+    }
+
+    changeSta();
+</script>

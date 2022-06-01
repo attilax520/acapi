@@ -1,0 +1,357 @@
+$def with(users=None,roles = None,relation=None,functions=None,logs = None,keywords = None,keywords_ori_log=None)
+<link href="/backoffice/assets/css/bootstrap.min.css" rel="stylesheet" />
+<script src="/backoffice/assets/js/jquery-2.0.3.min.js"></script>
+<script src="/backoffice/assets/js/bootstrap.min.js"></script>
+<br>
+<link href="/other.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-md-4">
+        
+        <table class="table" style="margin-bottom:0px;">
+            <tr>
+                <td style="border-top:0px;">用户</td>
+                <td class="text-right" style="border-top:0px;">共 <font color="red">
+                $if users and users != -1:
+                    $len(users)
+                </font> 条记录</td>
+            </tr>
+        </table>
+        <form method="POST">
+            <table class="table">
+                <tr>
+                    <td>
+                        关键字搜索
+                    </td>
+                    <td>
+                        <input type="text" name="keywords" class="form-control" placeholder="名字/编号/邮箱/电话" value="$keywords">
+                    </td>
+                    <td>
+                        <button type="submit" name="action" value="search" class="btn btn-info btn-sm">搜索</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <table class="table" id="user_list">
+            $if users:
+                <thead>
+                    <tr>
+                        <td>编号</td> 
+                        <td>名字</td> 
+                        <td>状态</td> 
+                        <td>操作</td> 
+                    </tr>
+                </thead>
+                $for item in users:
+                    <tr id="$item.id">
+                        <form method="POST" enctype="multipart/form-data" />
+                            <td>$item.get("worker_number", item.get("id", ""))</td>
+                            <td>$item.get("name", item.get("phone", ""))</td>
+                            <td>$item.status<input type=hidden name="id" value="$item.id"></td>
+                            <td><button type="submit" name="action" value="del" class="btn btn-danger btn-sm">x</button></td>
+                        </form>
+                    </tr>
+            
+            $else:
+                <tr>
+                    <td colspan="5">无</td>
+                </tr>
+        </table>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active">
+                <a href="#info" data-toggle="tab">
+                    用户定义
+                </a>
+            </li>
+            <li>
+                <a href="#create" data-toggle="tab">
+                    创建用户
+                </a>
+            </li>
+            <li>
+                <a href="#relation" data-toggle="tab">
+                    关联角色
+                </a>
+            </li>
+            <li>
+                <a href="#menu" data-toggle="tab">
+                    用户菜单
+                </a>
+            </li>
+            <li>
+                <a href="#visitmenu" data-toggle="tab">
+                    访问记录
+                </a>
+            </li>
+        </ul>
+        <br>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="info">
+                <table class="table" id="infoper" style="display:none;">
+                    <form method="POST" enctype="multipart/form-data" />
+                        <tr><td>序号</td><td><input type=text name="id" id="id" value="" class="form-control" readonly=""></td></tr>
+                        <tr><td>员工编号</td><td><input type=text name="worker_id" id="worker_id" value="" class="form-control"></td></tr>
+                        <tr><td>员工名字</td><td><input type=text name="name" id="name" value="" class="form-control"></td></tr>
+                        <tr><td>手机</td><td><input type=text name="phone" id="phone" value="" class="form-control"></td></tr>
+                        <tr><td>邮箱</td><td><input type=text name="email" id="email" value="" class="form-control"></td></tr>
+                        <tr><td>状态</td><td><input type=number name="status" id="status" value="" class="form-control"></td></tr>
+                        <tr>
+                            <td colspan="2"><button type="submit" name="action" value="change" class="btn btn-success btn-sm">保存</button></td>
+                        </tr>
+                    </form>
+                </table>
+                <p id="otherinfo">找不到信息</p>
+            </div>
+            <div class="tab-pane fade" id="create">
+                <table class="table">
+                    <form method="POST" enctype="multipart/form-data" onsubmit="return check()" />
+                        <tr><td>员工编号</td><td><input type=text name="worker_id" id="worker_id_create" value="" class="form-control"></td><td style="color:red;"></td></tr>
+                        <tr><td>员工名字</td><td><input type=text name="name" id="name_create" value="" class="form-control"></td><td style="color:red;">*</td></tr>
+                        <tr><td>手机</td><td><input type=text name="phone" id="phone_create" value="" class="form-control"></td><td style="color:red;">*</td></tr>
+                        <tr><td>密码</td><td><input type=text name="password" id="password_create" value="" class="form-control"></td><td style="color:red;">*</td></tr>
+                        <tr><td>邮箱</td><td><input type=text name="email" value="" class="form-control"></td></tr>
+                        <tr><td>状态</td><td><input type=number name="status" id="status_create" value=1 class="form-control"></td><td style="color:red;">*</td></tr>
+                        <tr><td colspan="3"><button type="submit" name="action" value="add" class="btn btn-primary btn-sm">创建</button></td></tr>
+                    </form>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="relation">
+                $if users:
+                    $for item_u in users:
+                        <table id="table$item_u.id" class="table" style="display:none" >
+                            <form method="POST">
+                                <tr>
+                                    <td>选择</td>
+                                    <td>编号</td>
+                                    <td>角色名</td>
+                                </tr>
+                               
+                                
+                                            $if roles:
+                                                $for item_r in roles:
+                                                    $if item_r.name != "":
+                                                        $ flag = False
+                                                        $if relation:
+                                                            $for item_n in relation:
+                                                                $if item_n.user_id == item_u.id and item_n.role == item_r.id:
+                                                                    $ flag = True
+                                                            <tr>
+                                                                <td>
+                                                                
+                                                                    <input type="checkbox" name="checkboxrole_$item_r.id" value=$(item_r.id) $return_string(flag, "checked", "") />
+                                                                </td>
+                                                                <td>$item_r.id</td>
+                                                                <td>$item_r.get("name", item_r.get("phone", ""))</td>
+                                                            </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <input type="hidden" name="u_id" value="$item_u.id">
+                                        <button type="submit" name="action" value="relation" class="btn btn-sm btn-default">确认关联</button>
+                                    </td>
+                                </tr>
+                            </form>
+                        </table>
+            </div>
+            <div class="tab-pane fade" id="menu">
+                $if users:
+                    $for item_u in users:
+                        <div class="tree well" id="menu$item_u.id" style="display:none">
+                        <ul>
+                        $if relation:
+                            $for item_n in relation:
+                                $if item_n.user_id == item_u.id:
+                                    $if roles:
+                                        $for item_r in roles:
+                                            $ val = 2**(item_r.id-1)
+                                            $if item_n.role and item_n.role & val == val:
+                                                <li>
+                                                    <span><i class="icon-folder-open"></i> $item_r.name {角色}</span>
+                                                    <ul>
+                                                        $if functions:
+                                                            $for item_f in functions:
+                                                                $if item_f.id != None:
+                                                                    $ valf = 2**(item_f.id)
+                                                                    $if item_r.function_mask and item_r.function_mask & valf == valf:
+                                                                        <li>
+                                                                            <span><i class="icon-leaf"></i></span> $item_f.name {权限}<a href=""></a>
+                                                                        </li>
+                                                    </ul>
+                                                </li>
+                                
+                            
+                                
+                                
+                        </ul>
+                        </div>
+            </div>
+            <div class="tab-pane fade" id="visitmenu">
+                <div>
+                    <table class="table" id="visitmenu_list" >
+                        $if users:
+                            $for u in users:
+                                <tr id="font$u.id" style="display:none;">
+                                    <form method="POST">
+                                        <td style="">
+                                            <input type="hidden" name="user_id" value="$u.id">
+                                            <input type="text" class="form-control input-sm" name="keywords" value="$keywords_ori_log" placeholder="权限名">
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-success input-sm" name="action" value="searchlog">查找</button>
+                                        </td>
+                                    </form>
+                                    <td style="">共 
+                                    <font style="color:red;" >
+                                        $ len_r_u = 0
+                                        $if logs:
+                                            $for l in logs:
+                                                $if l.id == u.id:
+                                                    $ len_r_u = len_r_u+1
+                                        $len_r_u
+                                    </font>
+                                    条记录
+                                    </td>
+                                </tr>
+                        </table>
+                </div>
+                $if users:
+                    $for item_u in users:
+                        <table id="visitmenu$item_u.id" class="table" style="display:none" >
+                            <form method="POST">
+                                $if logs:
+                                    $for item_l in logs:
+                                        $if item_l.id == item_u.id:
+                                            <tr>
+                                                <td>
+                                                    $if item_l.datetime:
+                                                        $"{:%Y-%m-%d %H:%M}".format(item_l.datetime)<br>
+                                                    $if functions:
+                                                        $for item_s in functions:
+                                                            $if item_s.id == item_l.previlege_id:
+                                                                $item_s.name
+                                                </td>
+                                            </tr>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br><br><br>
+<table style="margin-bottom:0px;">
+            <tr>
+                <form method="POST">
+                    <td style="border-top:0px;"><button type="submit" name="action" value="down" class="btn btn-success btn-sm">下载模板</button></td>
+                </form>
+                <form method="POST" enctype="multipart/form-data" onsubmit="return check2()">
+                    <td style="border-top:0px;">
+                        <input type="file" name="file_choose" id="file_choose" class="form-control input-sm">
+                    </td>
+                    <td style="border-top:0px;">
+                        <button type="submit" name="action" value="input" class="btn btn-success btn-sm">导入用户</button>
+                    </td>
+                </form>
+            </tr>
+        </table>
+
+<script type="text/javascript">
+    $$("#user_list tr").click(function(){
+        var id = this.id;
+        $$.ajax({ 
+           type: "POST",
+           url: "users",
+           data: "action=refersinfo&id_ajax="+id,
+           dataType:'json',
+           success: function(msg){
+                if(msg.errorCode==0){
+                    $$("#infoper").css("display","");
+                    $$("#otherinfo").css("display","none");
+
+                    $$("#id").val(msg.result.id);
+                    $$("#worker_id").val(msg.result.worker_number);
+                    $$("#name").val(msg.result.name);
+                    $$("#phone").val(msg.result.phone);
+                    $$("#email").val(msg.result.email);
+                    $$("#status").val(msg.result.status);
+                    
+                    $$("#relation").children("table").each(function(){
+                        $$(this).css("display","none");
+                    });
+                    var id_table = msg.result.id;
+                    $$("#table"+id_table).css("display","");
+
+                    $$("#menu").children("div").each(function(){
+                        $$(this).css("display","none");
+                    });
+                    $$("#menu"+id_table).css("display","");
+
+                    $$("#visitmenu").children("table").each(function(){
+                        $$(this).css("display","none");
+                    });
+                    $$("#visitmenu"+id_table).css("display","");
+
+                    $$("#visitmenu_list tr").each(function(){
+                        $$(this).css("display","none");
+                    });
+                    $$("#font"+id_table).css("display","");
+                }
+                else{
+                    $$("#infoper").css("display","none");
+                    $$("#otherinfo").css("display","");
+                }
+            }
+        });
+    });
+
+    $$("#user_list tbody tr").hover(function(){
+        $$(this).css("background-color","#BBFFFF");
+    },function(){
+        $$(this).css("background-color","white");
+    });
+    $$("#user_list tr")[1].click()
+
+    function check(){
+        var worker_id_create = $$("#worker_id_create").val();
+        var name_create = $$("#name_create").val();
+        var phone_create = $$("#phone_create").val();
+        var status_create = $$("#status_create").val();
+        if (
+        //worker_id_create.trim() == ""||
+        name_create.trim() == ""||phone_create.trim() == ""||status_create.trim() == "") {
+            alert("请填写完整必须数据");
+            return false;
+        }else{
+
+            return true;
+        }
+    }
+
+
+</script>
+
+<script type="text/javascript">
+ $$(function(){
+     $$('.tree li:has(ul)').addClass('parent_li').find(' > span').attr('title', 'Collapse this branch');
+     $$('.tree li.parent_li > span').on('click', function (e) {
+        var children = $$(this).parent('li.parent_li').find(' > ul > li');
+     if (children.is(":visible")) {
+        children.hide('fast');
+        $$(this).attr('title', 'Expand this branch').find(' > i').addClass('icon-plus-sign').removeClass('icon-minus-sign');
+     }else{
+        children.show('fast');
+        $$(this).attr('title', 'Collapse this branch').find(' > i').addClass('icon-minus-sign').removeClass('icon-plus-sign');
+     }
+        e.stopPropagation();
+     });
+ });
+</script>
+
+<script type="text/javascript">
+    function check2() {
+        var val = $$("#file_choose").val();
+        if (val=="") {
+            alert("请选择文件!");
+            return false;
+        }
+        return true;
+    }
+</script>

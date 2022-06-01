@@ -1,0 +1,52 @@
+$def with(user_type=0, user_id=None)
+	
+	<div class="sidebar-menu-inner" style="overflow:hidden; height:100%">	
+				
+		<header class="logo-env" style="padding-bottom:15px">
+			
+			<!-- logo -->
+			<div class="logo" style="align: middle">
+				<a href="javascript:;" class="logo-expanded">
+					<img src="/backoffice/assets/images/logo@2x.png" width="40" alt="" /><br>
+					$produkt_name
+				</a>
+				
+				<a href="javascript:;" class="logo-collapsed">
+					<img src="/backoffice/assets/images/logo-collapsed@2x.png" width="40" alt="" />
+				</a>
+			</div>
+			
+			<!-- This will toggle the mobile menu and will be visible only on mobile devices -->
+			<div class="mobile-menu-toggle visible-xs">
+				<a href="#" data-toggle="user-info-menu">
+					<i class="fa-bell-o"></i>
+					<span class="badge badge-success">7</span>
+				</a>
+				
+				<a href="#" data-toggle="mobile-menu">
+					<i class="fa-bars"></i>
+				</a>
+			</div>
+			
+			
+						
+		</header>	
+		<ul id="main-menu" class="main-menu" style="margin-top:0px">				
+				$:render.menu_left_crawler_management()
+				$:render.menu_left_publish_management()
+				$:render.menu_left_system_settings()
+				
+				$:render.menu_left_help()
+				$:render.menu_left_settings(user_type)
+				$:render.menu_left_settings_platform(user_type)						
+					
+		</ul>
+			
+	</div>
+	
+
+
+	
+    
+    
+    

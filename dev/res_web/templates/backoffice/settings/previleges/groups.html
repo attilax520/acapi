@@ -1,0 +1,190 @@
+$def with(users=None, current=None,keywords = None)
+
+<link href="/backoffice/assets/css/bootstrap.min.css" rel="stylesheet" />
+<script src="/backoffice/assets/js/jquery-2.0.3.min.js"></script>
+<script src="/backoffice/assets/js/bootstrap.min.js"></script>
+<br>
+<link href="/other.css" rel="stylesheet" />
+$ len = 0
+<div class="row" style="font-size:13px;">
+    <div class="col-md-4">
+        <table class="table" style="margin-bottom:0px;">
+            <tr>
+                <td style="border-top:0px;">组织域名［$current］</td>
+                <td class="text-right" style="border-top:0px;">共 <font color="red">
+                    $for it in users:
+                        $if it.schema_name != "pg_catalog" and it.schema_name != "information_schema" and it.schema_name != "public" and it.schema_name != "templates":
+                            $ len = len+1
+                    $len
+                </font> 条记录</td>
+            </tr>
+        </table>
+        <form method="POST">
+            <table class="table">
+               <tr>
+                   <td>关键字搜索</td>
+                   <td>
+                        <input type="text" name="keywords" class="form-control" placeholder="名称" value="$keywords">
+                   </td>
+                   <td><button type="submit" name="action" value="search" class="btn btn-warning btn-sm">搜索</button></td>
+               </tr> 
+            </table>
+        </form>
+        <table class="table" id="group_list">
+            $if users:
+                <thead>
+                    <tr>
+                        <td>序号</td>
+                        <td>对象名</td>
+                    </tr>
+                </thead>
+                $for item in users:
+                    $if item.schema_name != "pg_catalog" and item.schema_name != "information_schema" and item.schema_name != "public" and item.schema_name != "templates":
+                        <tr id="$item.schema_name">
+                            <form method="POST" enctype="multipart/form-data" />
+                                <td>$loop.index</td>
+                                <td>$item.schema_name</td>
+                                <td>
+                                    <input type=hidden name="name" value="$item.schema_name">
+                                    <button type="submit" name="action" value="del" class="btn btn-danger btn-sm">x</button>
+                                </td>
+                                <td><button type="submit" name="action" value="set" class="btn btn-success btn-sm">当前域</button></td>
+                            </form>
+                        </tr>
+            $else:
+                <tr><td colspan="4">无</td></tr>
+        </table>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        <ul id="myTab" class="nav nav-tabs">
+            <li class="active">
+                <a href="#info" data-toggle="tab">
+                    域定义
+                </a>
+            </li>
+            <li>
+                <a href="#create" data-toggle="tab">
+                    创建域
+                </a>
+            </li>
+            <li>
+                <a href="#infoRun" data-toggle="tab">
+                    运营概况
+                </a>
+            </li>
+        </ul>
+        <br>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade in active" id="info">
+                <table id="infoper" class="table" style="display:none;">
+                    <tr>
+                        <td>默认字符集名</td>
+                        <td id="default_character_set_name"></td>
+                    </tr>
+                    <tr>
+                        <td>对象所有者</td>
+                        <td id="schema_owner"></td>
+                    </tr>
+                    <tr>
+                        <td>对象名</td>
+                        <td id="schema_name"></td>
+                    </tr>
+                    <tr>
+                        <td>默认字符集目录</td>
+                        <td id="default_character_set_catalog"></td>
+                    </tr>
+                    <tr>
+                        <td>默认字符集对象</td>
+                        <td id="default_character_set_schema"></td>
+                    </tr>
+                    <tr>
+                        <td>目录名</td>
+                        <td id="catalog_name"></td>
+                    </tr>
+                    <tr>
+                        <td>SQL路径</td>
+                        <td id="sql_path"></td>
+                    </tr>
+                </table>
+                <p id="otherinfo">找不到信息</p>
+            </div>
+            <div class="tab-pane fade" id="create">
+                <form method="POST" enctype="multipart/form-data" onsubmit="return check()" />
+                    <table>
+                        <tr>
+                            <td>名称</td>
+                            <td><input type=text name="name" value="" class="form-control" id="name"></td>
+                            <td style="color:red">*</td>
+                            <td><button type="submit" name="action" value="add" class="btn btn-info btn-sm">创建</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="infoRun">
+                 <table class="table">
+                    <tr>
+                        <td>总人数</td>
+                        <td id="people_count"></td>
+                    </tr>
+                    <tr>
+                        <td>开放功能</td>
+                        <td id="function_count"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $$("#group_list tbody tr").click(function(){
+        var name = this.id;
+        $$.ajax({ 
+           type: "POST",
+           url: "/settings/previleges/groups",
+           data: "action=refersinfo&name_ajax="+name,
+           dataType:'json',
+           success: function(msg){
+                if(msg.errorCode==0){
+                    $$("#infoper").css("display","");
+                    $$("#otherinfo").css("display","none");
+
+                    $$("#default_character_set_name").html(msg.result.info.default_character_set_name);
+                    $$("#schema_owner").html(msg.result.info.schema_owner);
+                    $$("#schema_name").html(msg.result.info.schema_name);
+                    $$("#default_character_set_catalog").html(msg.result.info.default_character_set_catalog);
+                    $$("#default_character_set_schema").html(msg.result.info.default_character_set_schema);
+                    $$("#catalog_name").html(msg.result.info.catalog_name);
+                    $$("#sql_path").html(msg.result.info.sql_path);
+                    $$("#people_count").html(msg.result.len);
+                    $$("#function_count").html(msg.result.fun_len);
+                }
+                else{
+                    $$("#infoper").css("display","none");
+                    $$("#otherinfo").css("display","");
+                }
+            }
+        });
+    });
+
+    $$("#group_list tbody tr").hover(function(){
+        $$(this).css("background-color","#BBFFFF");
+    },function(){
+        $$(this).css("background-color","white");
+    });
+
+    $$("#group_list tr")[1].click()
+
+    function check(){
+        var name = $$("#name").val();
+        if (name.trim() == "") {
+            alert("请填写完整必须数据");
+            return false;
+        }else{
+            return true;
+        }
+    }
+</script>
+
+
+
