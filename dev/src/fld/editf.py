@@ -7,7 +7,11 @@ class tasksCls2:
     def m():
         print("m me out...")
         return    
-
+class  staticxCls:
+    def GET(self, name):
+        import sys
+        f = open(sys.path[0]+'/../staticx/' + name)
+        return f.read()
 def query(db,sql):
     import sqlite3
     import os

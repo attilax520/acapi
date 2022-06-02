@@ -56,7 +56,7 @@ if __name__ == "__main__":
     from fld.editf import *
     tasksCls2.m()
    # exit()
-    url2 = urls + ('/xxx', 'fld.editf.tasksCls2','/edit','fld.editf.editCls')
+    url2 = urls + ('/xxx', 'fld.editf.tasksCls2','/edit','fld.editf.editCls','/staticx/(.*)','fld.editf.staticxCls')
     print(url2)
     print("start server...")
 
