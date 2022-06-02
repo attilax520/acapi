@@ -9,6 +9,7 @@ import os, sys
 from config import *
 
 import main_test
+
 import backoffice
 
 def run_callback(socket):
@@ -30,9 +31,13 @@ class tasksCls:
     def GET(self):
         return "Hello, tasksCls!"
     def POST(self):
-        return "Hello, tasksCls!"    
-
+        return "Hello, tasksCls! post meth"    
+web.webapi.internalerror = web.debugerror
+web.internalerror = web.debugerror
 if __name__ == "__main__":
+    from fld.f import * 
+    m()
+    #exit()
     try:
         import web.functions.previleges
         import web.functions.account
@@ -47,10 +52,14 @@ if __name__ == "__main__":
         pass
     
     #you yva
-    # '/backoffice/editmk/edit', 'backoffice.editmk.edit.html'
-    url2 = urls + ('/edit', 'tasksCls')
+    #  
+    from fld.editf import *
+    tasksCls2.m()
+   # exit()
+    url2 = urls + ('/xxx', 'fld.editf.tasksCls2','/edit','fld.editf.editCls')
     print(url2)
     print("start server...")
+
     start(url2, template_globals=global_vars, cache=False, run_callback=run_callback, #ssl=True
           )
 

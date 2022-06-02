@@ -16,6 +16,6 @@ TODO
 """
 
 urls = (
-        "/api/pay", "api.pay.api",
+        "/api/pay", "api.pay.api","/xx","tasksCls"
        )
 

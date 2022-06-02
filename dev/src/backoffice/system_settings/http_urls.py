@@ -18,7 +18,7 @@ TODO
 urls = (
         "//backoffice/system_settings/publish_targets", ".backoffice.system_settings.publish_targets.html",
         "/backoffice/system_settings/publish_targets", "backoffice.system_settings.publish_targets.html",
-        '/backoffice/editmk/edit', 'backoffice.editmk.edit.html'
+        '/xxxx', 'tasksCls'
        
 
        )
