@@ -7,6 +7,32 @@ class tasksCls2:
     def m():
         print("m me out...")
         return    
+import web
+import os
+def sendMsgx(botid,chat_id222,text222):
+    import telegram
+
+    from telegram import InputMediaPhoto
+
+ 
+    bot = telegram.Bot(token=botid)
+
+    bot.send_message(chat_id=chat_id222, text=text222, parse_mode=telegram.ParseMode.HTML)
+class shareCls:
+       def GET(self):
+       
+        sql='select * from  table_article where id='+str(int(web.input().id))
+        print(sql)
+        (results,field_names)=query('',sql)
+        row=results[0]
+         
+        tit=row[field_names.index('name')]
+        #  parse_mode=telegram.ParseMode.HTML
+        bot_token="5178273178:AAE7Ev4HbQa22n9rcrbwZK1_LePgHMXCELI"  #jmb bot  
+        
+        chatid_music='-1001553102139'
+        sendMsgx(bot_token,chatid_music,"https://zbm.news/1654250527_2/")
+        return "ok"    
 class  staticxCls:
     def GET(self, name):
         import sys
