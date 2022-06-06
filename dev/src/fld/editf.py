@@ -9,15 +9,24 @@ class tasksCls2:
         return    
 import web
 import os
-def sendMsgx(botid,chat_id222,text222):
-    import telegram
-
-    from telegram import InputMediaPhoto
-
- 
-    bot = telegram.Bot(token=botid)
-
-    bot.send_message(chat_id=chat_id222, text=text222, parse_mode=telegram.ParseMode.HTML)
+from utifld.util import *
+from utifld.dbx import *
+from sdk.mysql import *
+from cfgx import *
+class pubCls:
+       def GET(self):
+       
+        sql='select * from  table_article where id='+str(int(web.input().id))
+        print(sql)
+        (results,field_names)=query('',sql)
+        row=results[0]
+         
+        tit=row[field_names.index('name')]
+        con=row[field_names.index('text_content')]
+        from sdk.mysql import *
+        sql=f"insert wp_posts set post_content='{con}' ,post_title='{tit}',post_status='publish',post_date=NOW(),post_date_gmt=NOW(),post_excerpt='' ,to_ping='',pinged='',post_modified=now(),post_modified_gmt=now(),post_content_filtered=''" 
+        conn = pymysql.connect(host=wdprs_host,user= wdprs_user,password=wdprs_pwd,db= wdprs_db)
+        print( exeSqlUpdt(sql,conn)  ) 
 class shareCls:
        def GET(self):
        
@@ -38,34 +47,7 @@ class  staticxCls:
         import sys
         f = open(sys.path[0]+'/../staticx/' + name)
         return f.read()
-def query(db,sql):
-    import sqlite3
-    import os
-    import sys
 
-    # conn = sqlite3.connect('%s/../db_test')
-    print(os.getcwd())
-    print(sys.path[0])
-    conn = sqlite3.connect(sys.path[0]+'/../db_test')
-    #D:\0src\acbo_api\dev\src main scrpt  boot path
-
-    print ("数据库打开成功")
-    c = conn.cursor()
-    print ("数据库打开成功")
-
-    cursor = c.execute(sql)
-    results = cursor.fetchall()
-    # print(results)
-    print('000000000000000000000000000')
-    # for item in results:
-    #     print(item)
-
-    print(cursor)
-    num_fields = len(cursor.description)
-    field_names = [i[0] for i in cursor.description]
-    
-    print(field_names)
-    return results,field_names
 
 class editCls:
     def GET(self):
