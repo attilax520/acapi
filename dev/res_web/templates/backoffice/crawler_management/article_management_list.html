@@ -58,16 +58,16 @@ $def with (data=None, data_category=None, data_tag=None,order=None,page=1,limit=
 
           <td>
             <a href="/edit?id=$item.id" target="_blank">
-                <button form="formaction_id_" name="action" value="1" class="btn btn-success">编辑</button>
+                <button  type="button" form="formaction_id_" name="action" value="1" class="btn btn-success">编辑</button>
             </a>
             <a href="/pubx?id=$item.id" target="_blank">
-                <button form="formaction_id_$item.id" name="action" value="1" class="btn btn-info">同步</button>
+                <button  type="button" form="formaction_id_$item.id" name="action" value="1" class="btn btn-info">同步</button>
             </a>
             <a href="/pubx?id=$item.id" target="_blank">
-                <button form="formaction_id_$item.id" name="action" value="1" class="btn btn-success">发布</button>
+                <button  type="button" form="formaction_id_$item.id" name="action" value="1" class="btn btn-success">发布</button>
             </a>
             <a href="/share?id=$item.id" target="_blank">
-                <button form="formaction_id_$item.id" name="action" value="1" class="btn btn-info">分享</button>
+                <button   type="button" form="formaction_id_$item.id" name="action" value="1" class="btn btn-info">分享</button>
             </a>
         </td>
             </tr>

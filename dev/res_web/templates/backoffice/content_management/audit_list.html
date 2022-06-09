@@ -61,18 +61,17 @@ function toggle(source) {
                 $item.updated.date() $item.updated.replace(microsecond=0).time()
             </td>
             <td>
-                <a href="/" target="_blank">
-                    <button form="formaction_id_$item.id" name="action" value="1" class="btn btn-success">编辑</button>
+                <a href="/edit?id=$item.id" target="_blank">
+                    <button  type="button" form="formaction_id_" name="action" value="1" class="btn btn-success">编辑</button>
                 </a>
-
-                <a href="/" target="_blank">
-                    <button form="formaction_id_$item.id" name="action" value="1" class="btn btn-info">同步</button>
+                <a href="/pubx?id=$item.id" target="_blank">
+                    <button  type="button" form="formaction_id_$item.id" name="action" value="1" class="btn btn-info">同步</button>
                 </a>
-                <a href="/" target="_blank">
-                    <button form="formaction_id_$item.id" name="action" value="1" class="btn btn-success">发布</button>
+                <a href="/pubx?id=$item.id" target="_blank">
+                    <button  type="button" form="formaction_id_$item.id" name="action" value="1" class="btn btn-success">发布</button>
                 </a>
                 <a href="/share?id=$item.id" target="_blank">
-                    <button  type="button" name="action" value="1" class="btn btn-info">分享</button>
+                    <button   type="button" form="formaction_id_$item.id" name="action" value="1" class="btn btn-info">分享</button>
                 </a>
             <br>   
 
