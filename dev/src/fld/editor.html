@@ -42,26 +42,32 @@ $def with (rs,flds,tit,con,art)
 </head>
 <body>
 
-±à¼­ÎÄÕÂ
+æ–‡ç« ç¼–è¾‘
 
 
 
 
-
+<div style="display: none">
 <p style="display:none">
     $rs
     $flds
     $art
 </p>
+</div>
 <p>
-    <input value="$tit" / >
+	<form action="/editsave" method="post">
+		<input type="hidden" value="$art['id']" name="id" / >
+    <input value="$tit" name="tit" / >
     <p></p>
     <textarea name="content1" id="w3review" name="w3review" rows="25" cols="200">
         $con
         </textarea>
-    
-</p>
 
-<button>ok</button>
+		<button >ok</button>
+    </form>
+</p>
+ 
+
+ 
 
 </body>

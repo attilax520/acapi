@@ -57,7 +57,7 @@ if __name__ == "__main__":
     tasksCls2.m()
    # exit()
     url2 = urls + ('/xxx', 'fld.editf.tasksCls2','/edit','fld.editf.editCls','/staticx/(.*)','fld.editf.staticxCls'
-    ,'/share','fld.editf.shareCls','/pubx','fld.editf.pubCls')
+    ,'/share','fld.editf.shareCls','/pubx','fld.editf.pubCls','/editsave','fld.editf.edsvCls')
     print(url2)
     print("start server...")
 
