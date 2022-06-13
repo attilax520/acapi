@@ -1,4 +1,5 @@
 
+# cd /d D:\0src\acbo_api\dev\src
 # python tlgrm.py
 
 
@@ -44,5 +45,7 @@ def sendMsg(botid,chat_id222,text222):
 bot_token="5178273178:AAE7Ev4HbQa22n9rcrbwZK1_LePgHMXCELI"  #jmb bot  
 chat_id222 = "-1001479969649"   #atigrp 
 chatid_music='-1001553102139'
-sendMsg(bot_token,chatid_music,"https://zbm.news/1654250527_2/")
+
+jonbmgrpid="-1001637725289"
+sendMsg(bot_token,jonbmgrpid,"https://zbm.news/1654250527_2/")
  

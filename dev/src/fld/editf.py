@@ -56,6 +56,9 @@ class shareCls:
         bot_token="5178273178:AAE7Ev4HbQa22n9rcrbwZK1_LePgHMXCELI"  #jmb bot  
         
         chatid_music='-1001553102139'
+        jonbmgrpid="-1001637725289"
+       
+        sendMsgx(bot_token,jonbmgrpid,"https://zbm.news/1654250527_2/")
         sendMsgx(bot_token,chatid_music,"https://zbm.news/1654250527_2/")
         return "ok"    
 class  staticxCls:
